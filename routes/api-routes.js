@@ -9,13 +9,13 @@ module.exports = function(app) {
   // In each of the below cases when a user visits a link
   // ---------------------------------------------------------------------------
 
-  app.get("/api/tables", function(req, res) {
-    res.json(tableData);
+  app.get("/api/notes", function(req, res) {
+    res.json();
   });
 
-  app.get("/api/waitlist", function(req, res) {
-    res.json(waitListData);
-  });
+  // app.get("/api/notes", function(req, res) {
+  //   res.json(waitListData);
+  // });
 
   // API POST Requests
   // Below code handles when a user submits a form and thus submits data to the server.
@@ -30,23 +30,23 @@ module.exports = function(app) {
     // It will do this by sending out the value "true" have a table
     // req.body is available since we're using the body parsing middleware
     if (tableData.length < 5) {
-      tableData.push(req.body);
+      notes.push(req.body);
       res.json(true);
     }
     else {
-      waitListData.push(req.body);
+      notes.push(req.body);
       res.json(false);
     }
   });
 
   // ---------------------------------------------------------------------------
- //clear out the table while working with the functionality.
+ //clears out the table while working with the functionality.
   
 
   app.post("/api/notes", function(req, res) {
     // Empty out the arrays of data
-    tableData.length = 0;
-    waitListData.length = 0;
+    notes.length = 0;
+    notes.length = 0;
 
     res.json({ ok: true });
   });
