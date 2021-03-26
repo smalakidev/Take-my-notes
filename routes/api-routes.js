@@ -1,3 +1,4 @@
+const fs = require('fs');
 
 // ===============================================================================
 // ROUTING
@@ -10,8 +11,19 @@ module.exports = function(app) {
   // ---------------------------------------------------------------------------
 
   app.get("/api/notes", function(req, res) {
-    res.json();
-  });
+
+    fs.readFile('db/db.json', 'utf8', function (err, data) {
+      if (err) {
+       console.error(err);
+      }
+      console.log(data);
+      res.json(JSON.parse(data))
+   });
+});
+
+
+
+  };
 
   // app.get("/api/notes", function(req, res) {
   //   res.json(waitListData);
@@ -25,29 +37,29 @@ module.exports = function(app) {
   // Then the server saves the data to the tableData array)
   // ---------------------------------------------------------------------------
 
-  app.post("/api/notes", function(req, res) {
-    // Note the code here. Our "server" will respond to requests and let users know if they have a table or not.
-    // It will do this by sending out the value "true" have a table
-    // req.body is available since we're using the body parsing middleware
-    if (tableData.length < 5) {
-      notes.push(req.body);
-      res.json(true);
-    }
-    else {
-      notes.push(req.body);
-      res.json(false);
-    }
-  });
+  // app.post("/api/notes", function(req, res) {
+  //   // Note the code here. Our "server" will respond to requests and let users know if they have a table or not.
+  //   // It will do this by sending out the value "true" have a table
+  //   // req.body is available since we're using the body parsing middleware
+  //   if (tableData.length < 5) {
+  //     notes.push(req.body);
+  //     res.json(true);
+  //   }
+  //   else {
+  //     notes.push(req.body);
+  //     res.json(false);
+  //   }
+  // });
 
   // ---------------------------------------------------------------------------
  //clears out the table while working with the functionality.
   
 
-  app.post("/api/notes", function(req, res) {
-    // Empty out the arrays of data
-    notes.length = 0;
-    notes.length = 0;
+  // app.post("/api/notes", function(req, res) {
+  //   // Empty out the arrays of data
+  //   notes.length = 0;
+  //   notes.length = 0;
 
-    res.json({ ok: true });
-  });
-};
+//     res.json({ ok: true });
+//   });
+// };
