@@ -1,4 +1,6 @@
 const fs = require('fs');
+const { v4: uuidv4 } = require('uuid');
+//uuidv4();
 
 // ===============================================================================
 // ROUTING
@@ -21,6 +23,16 @@ module.exports = function(app) {
    });
 });
 
+
+app.post('/api/notes', function(req, res){
+  console.log(req.body)
+  
+
+  
+
+
+
+})
 
 
   };
