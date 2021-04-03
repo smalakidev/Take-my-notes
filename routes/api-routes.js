@@ -1,6 +1,6 @@
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
-//uuidv4();
+
 
 // ===============================================================================
 // ROUTING
@@ -18,19 +18,38 @@ module.exports = function(app) {
       if (err) {
        console.error(err);
       }
-      console.log(data);
+
       res.json(JSON.parse(data))
    });
 });
 
 
 app.post('/api/notes', function(req, res){
-  console.log(req.body)
-  
+  let { title, text} = req.body;
 
-  
+  const newNote =  { title: title, text: text, id: uuidv4() }
 
+  //read the file db.json
+  fs.readFile('db/db.json', 'utf8', function(err, data){
+    if(err){
+      console.error(err)
+    }
+    console.log('get')
+ 
+   let dataArr = JSON.parse(data);
+   
 
+    let newArr = [...dataArr, newNote];
+
+   fs.writeFile('db/db.json', JSON.stringify(newArr), function(data){
+     console.log(data)
+   })
+
+  })
+  //we will parse the array
+  //add new note obj to array
+  //rewite the db.json file with new array
+res.json({ok: true})
 
 })
 
