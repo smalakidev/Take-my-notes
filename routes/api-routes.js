@@ -54,12 +54,25 @@ res.json({ok: true})
 })
 
 
-  };
+  
 //This will be for the delete portion of the Note Taker
   app.delete("/api/notes/:id", function(req, res) {
     let id = req.params.id
 
-    fs.readFile
+    fs.readFile('db/db.json', 'utf8', function(err, data){
+      if(err){
+        console.error(err)
+      }
+      console.log('delete', typeof(JSON.parse(data)));
+      let newArr = data.filter(data => data.id != id);
+
+      fs.writeFile('db/db.json', JSON.stringify(newArr), function(data){
+        console.log(data)
+      })
+   
+    });
     
-  });
+
+    })
+  }; 
 
