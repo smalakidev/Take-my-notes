@@ -5,11 +5,8 @@
 
 var express = require("express");
 
-// ==============================================================================
-// EXPRESS CONFIGURATION
-// This sets up the basic properties for our express server
-// ==============================================================================
-
+//Mongoose is imported here
+const mongoose = require("mongoose");
 // Tells node that we are creating an "express" server
 var app = express();
 
@@ -30,8 +27,14 @@ app.use(express.static('public'));
 require("./routes/api-routes")(app);
 require("./routes/html-routes")(app);
 
-//Our server gets started here
+//Forming a connection to the database
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/budget", {
+  useNewUrlParser: true,
+  useFindAndModify: false
+});
 
+
+//Our server gets started here
 app.listen(PORT, function() {
   console.log("App listening on PORT: " + PORT);
 });
