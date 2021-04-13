@@ -1,12 +1,11 @@
-// ==============================================================================
-// DEPENDENCIES
+
 // Series of npm packages that we will use to give our server useful functionality
-// ==============================================================================
+
 
 var express = require("express");
 
 //Mongoose is imported here
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 // Tells node that we are creating an "express" server
 var app = express();
 
@@ -28,10 +27,10 @@ require("./routes/api-routes")(app);
 require("./routes/html-routes")(app);
 
 //Forming a connection to the database
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/budget", {
-  useNewUrlParser: true,
-  useFindAndModify: false
-});
+// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/budget", {
+//   useNewUrlParser: true,
+//   useFindAndModify: false
+// });
 
 
 //Our server gets started here
